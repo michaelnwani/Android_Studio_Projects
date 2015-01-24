@@ -47,7 +47,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Minor: Computer Science"
-            android:id="@+id/"
             android:textColor="@color/abc_background_cache_hint_selector_material_dark"
             android:textSize="24dp" />
 
