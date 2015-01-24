@@ -19,35 +19,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Michael Nwani"
-                android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+                android:textColor="@color/primary_dark_material_dark"
                 android:textSize="24dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email: nwani.m@husky.neu.edu"
-            android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+            android:textColor="@color/primary_dark_material_dark"
             android:textSize="24dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Year: Senior"
-            android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+            android:textColor="@color/primary_dark_material_dark"
             android:textSize="24dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Degree: BS Computer Engineering"
-            android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+            android:textColor="@color/primary_dark_material_dark"
             android:textSize="24dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Minor: Computer Science"
-            android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+            android:textColor="@color/primary_dark_material_dark"
             android:textSize="24dp" />
 
         <LinearLayout
@@ -58,13 +58,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="IMEI:"
-                android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+                android:textColor="@color/primary_dark_material_dark"
                 android:textSize="24dp" />
             <TextView
                 android:id="@+id/imei_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+                android:textColor="@color/primary_dark_material_dark"
                 android:textSize="24dp"
                 />
             </LinearLayout>
