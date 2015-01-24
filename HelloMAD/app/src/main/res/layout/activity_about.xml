@@ -1,0 +1,80 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/profile_pic2"
+                android:contentDescription="@string/aboutme_description"
+                android:scaleType="center"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Michael Nwani"
+                android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+                android:textSize="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email: nwani.m@husky.neu.edu"
+            android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+            android:textSize="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Year: Senior"
+            android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+            android:textSize="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Degree: BS Computer Engineering"
+            android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+            android:textSize="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Minor: Computer Science"
+            android:id="@+id/"
+            android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+            android:textSize="24dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IMEI:"
+                android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+                android:textSize="24dp" />
+            <TextView
+                android:id="@+id/imei_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+                android:textSize="24dp"
+                />
+            </LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
+
+</LinearLayout>
