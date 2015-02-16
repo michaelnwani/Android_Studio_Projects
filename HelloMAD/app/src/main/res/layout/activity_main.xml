@@ -10,13 +10,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:textAlignment="center"
-            android:text="@string/my_name"
-            android:textSize="36sp"
-             />
 
         <Button
             android:id="@+id/about_button"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">HelloMAD</string>
+    <string name="app_name">NUMAD15S-MichaelNwani</string>
     <string name="hello_world">In AboutActivity!</string>
     <string name="action_settings">Settings</string>
     <string name="my_name">Michael Nwani</string>
@@ -55,4 +55,6 @@ row, each column, and each of the 3x3 boxes
     <string name="clear_text">Clear</string>
     <string name="dictionary_acknowledgements">\
         1) I have no images/icons/graphics I didn\'t design myself.\n 2) I got inspiration for my readFile() from: http://stackoverflow.com/questions/14376807/how-to-read-write-string-from-a-file-in-android.\n 3) I didn\'t ask anyone for help.</string>
+    <string name="loading_text">\
+    Loading... please wait</string>
 </resources>

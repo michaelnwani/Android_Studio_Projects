@@ -1,7 +1,10 @@
 package edu.neu.madcourse.michaelnwani;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +24,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setTitle("Michael Nwani");
 
         mAboutButton = (Button)findViewById(R.id.about_button);
         mSudokuButton = (Button)findViewById(R.id.sudoku_button);
@@ -58,19 +64,8 @@ public class MainActivity extends Activity {
                 //Not really sure what to do here... so here's an infinite loop
 
 
-                try
-                {
-                    int i = 1, b=10000000;
-
-                    while (i < 10)
-                    {
-                        b *= b;
-                    }
-                    throw new IllegalAccessException("An error I purposely created");
-                }
-                catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
+                int test[] = new int[5];
+                int b = test[9];
             }
         });
 
@@ -83,5 +78,9 @@ public class MainActivity extends Activity {
             }
         });
 
+
+
     }
+
+
 }
