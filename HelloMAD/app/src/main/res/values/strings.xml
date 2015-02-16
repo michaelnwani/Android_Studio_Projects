@@ -46,4 +46,13 @@ row, each column, and each of the 3x3 boxes
 (also called <i>blocks</i>) contains the digits
 1 to 9 exactly once.
 </string>
+
+    <string name="dictionary_title">Test Dictionary</string>
+    <string name="dictionary_button">Dictionary</string>
+    <string name="my_hint">Enter characters here...</string>
+    <string name="back_text">Return to menu</string>
+    <string name="acknowledgement_text">Acknowledgements</string>
+    <string name="clear_text">Clear</string>
+    <string name="dictionary_acknowledgements">\
+        1) I have no images/icons/graphics I didn\'t design myself.\n 2) I got inspiration for my readFile() from: http://stackoverflow.com/questions/14376807/how-to-read-write-string-from-a-file-in-android.\n 3) I didn\'t ask anyone for help.</string>
 </resources>

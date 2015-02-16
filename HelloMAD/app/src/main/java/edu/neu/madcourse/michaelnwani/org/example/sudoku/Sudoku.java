@@ -46,6 +46,7 @@ public class Sudoku extends Activity implements OnClickListener {
    protected void onResume() {
       super.onResume();
       Music.play(this, R.raw.hurry);
+
    }
 
    @Override

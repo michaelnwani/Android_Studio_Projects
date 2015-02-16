@@ -1,22 +1,21 @@
 package edu.neu.madcourse.michaelnwani;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import edu.neu.madcourse.michaelnwani.org.example.sudoku.Sudoku;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     private Button mAboutButton;
     private Button mSudokuButton;
     private Button mQuitButton;
     private Button mErrorButton;
+    private Button mDictionaryButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +25,9 @@ public class MainActivity extends ActionBarActivity {
         mAboutButton = (Button)findViewById(R.id.about_button);
         mSudokuButton = (Button)findViewById(R.id.sudoku_button);
         mQuitButton = (Button)findViewById(R.id.quit_button);
+
         mErrorButton = (Button)findViewById(R.id.error_button);
+        mDictionaryButton = (Button)findViewById(R.id.dictionary_button);
 
         mAboutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,37 +56,32 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 //Not really sure what to do here... so here's an infinite loop
-                int i = 1, b=2;
 
-                while (i < 10)
+
+                try
                 {
-                    b += b;
+                    int i = 1, b=10000000;
+
+                    while (i < 10)
+                    {
+                        b *= b;
+                    }
+                    throw new IllegalAccessException("An error I purposely created");
+                }
+                catch (IllegalAccessException e) {
+                    e.printStackTrace();
                 }
             }
         });
 
-    }
+        mDictionaryButton.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, DictionaryActivity.class);
+                startActivity(i);
+            }
+        });
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

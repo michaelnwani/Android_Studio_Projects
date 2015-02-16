@@ -15,36 +15,42 @@
             android:layout_height="fill_parent"
             android:textAlignment="center"
             android:text="@string/my_name"
-            android:textSize="36dp"
-            android:textColor="@color/primary_dark_material_dark" />
+            android:textSize="36sp"
+             />
 
         <Button
             android:id="@+id/about_button"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:text="@string/about_button"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/error_button"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:text="@string/error_button"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/sudoku_button"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:text="@string/sudoku_button"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
+        <Button
+            android:id="@+id/dictionary_button"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/dictionary_button"
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/quit_button"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:text="@string/quit_button"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
 
         </LinearLayout>
 

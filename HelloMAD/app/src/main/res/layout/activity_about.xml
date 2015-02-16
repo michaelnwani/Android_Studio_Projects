@@ -19,36 +19,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Michael Nwani"
-                android:textColor="@color/primary_dark_material_dark"
-                android:textSize="24dp" />
+
+                android:textSize="22sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email: nwani.m@husky.neu.edu"
-            android:textColor="@color/primary_dark_material_dark"
-            android:textSize="24dp" />
+
+            android:textSize="22sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Year: Senior"
-            android:textColor="@color/primary_dark_material_dark"
-            android:textSize="24dp" />
+
+            android:textSize="22sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Degree: BS Computer Engineering"
-            android:textColor="@color/primary_dark_material_dark"
-            android:textSize="24dp" />
+            android:text="Degree: B.S. Computer Engineering"
+
+            android:textSize="22sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Minor: Computer Science"
-            android:textColor="@color/primary_dark_material_dark"
-            android:textSize="24dp" />
+
+            android:textSize="22sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,14 +58,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="IMEI:"
-                android:textColor="@color/primary_dark_material_dark"
-                android:textSize="24dp" />
+
+                android:textSize="22sp" />
             <TextView
                 android:id="@+id/imei_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primary_dark_material_dark"
-                android:textSize="24dp"
+
+                android:textSize="22sp"
                 />
             </LinearLayout>
 
