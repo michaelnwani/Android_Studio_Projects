@@ -165,4 +165,6 @@ public class DictionaryActivity extends Activity {
         mp = MediaPlayer.create(this, R.raw.chime);
         mp.start();
     }
+
+
 }
