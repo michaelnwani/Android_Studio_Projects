@@ -1,0 +1,5 @@
+/Users/michaelnwani/AndroidStudioProjects/BrowserIntent/app/build/intermediates/classes/debug
+/Users/michaelnwani/AndroidStudioProjects/BrowserIntent/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-af3ab145bbaf68a0e635383b77449014bdd83f2d.jar
+/Users/michaelnwani/AndroidStudioProjects/BrowserIntent/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-fe78e101919796fd0788cb45abf104c6a3e2e0dd.jar
+/Users/michaelnwani/AndroidStudioProjects/BrowserIntent/app/build/intermediates/pre-dexed/debug/classes-f4e3906ef56c6018737d5d8270266d61a72c798c.jar
+/Users/michaelnwani/AndroidStudioProjects/BrowserIntent/app/build/intermediates/pre-dexed/debug/classes-fc144d0a8874e15d2b2f148c13fe491882250b6d.jar

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/michaelnwani/AndroidStudioProjects/Translate/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/michaelnwani/AndroidStudioProjects/Translate/app/build/intermediates/pre-dexed/debug/classes-998b7072a222e1a20a0b3bc4d786027bca9be1c9.jar" />
+    </item>
+    <item
+        jar="/Users/michaelnwani/AndroidStudioProjects/Translate/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/michaelnwani/AndroidStudioProjects/Translate/app/build/intermediates/pre-dexed/debug/classes-44e610582a4b558453636cfdba6467c97ceb6619.jar" />
+    </item>
+    <item
+        jar="/Users/michaelnwani/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/michaelnwani/AndroidStudioProjects/Translate/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-af3ab145bbaf68a0e635383b77449014bdd83f2d.jar" />
+    </item>
+    <item
+        jar="/Users/michaelnwani/AndroidStudioProjects/Translate/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/michaelnwani/AndroidStudioProjects/Translate/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-c980a35a98a097ba8b5d7e0cbcb50377a2c10b09.jar" />
+    </item>
+
+</items>
