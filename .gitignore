@@ -1,0 +1,30 @@
+# Android Keystore and keys #
+#############################
+*.jks
+
+# Certain projects #
+####################
+Sudokuv1
+Sudokuv4
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# OS generated files #
+######################
+.DS_Store
+.DS_STORE
+.DS_STORE?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
