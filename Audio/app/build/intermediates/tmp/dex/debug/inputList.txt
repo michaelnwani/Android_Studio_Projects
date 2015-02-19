@@ -1,0 +1,5 @@
+/Users/michaelnwani/AndroidStudioProjects/Audio/app/build/intermediates/classes/debug
+/Users/michaelnwani/AndroidStudioProjects/Audio/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-af3ab145bbaf68a0e635383b77449014bdd83f2d.jar
+/Users/michaelnwani/AndroidStudioProjects/Audio/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-0e48c9070e27bf70495443928eb41dd4fdba44ae.jar
+/Users/michaelnwani/AndroidStudioProjects/Audio/app/build/intermediates/pre-dexed/debug/classes-9ea6aabae11b9e2761e24eccb2b3f4a1970f8b34.jar
+/Users/michaelnwani/AndroidStudioProjects/Audio/app/build/intermediates/pre-dexed/debug/classes-8a2f771c33248ec519365f3ff2777c9017e210d5.jar
