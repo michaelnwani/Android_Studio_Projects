@@ -2,9 +2,11 @@ package edu.neu.madcourse.michaelnwani;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,13 +30,15 @@ public class DictionaryActivity extends Activity {
 
     private EditText mEditText;
     private TextView mTextView;
-    private static final int DICTIONARY_WORD_COUNT = 432334;
-    private final HashMap<String, String> words2 = new HashMap<String, String>(DICTIONARY_WORD_COUNT);
+    private static final int FILE_WORD_COUNT = 50000;
+    private final HashMap<String, String> words = new HashMap<String, String>(FILE_WORD_COUNT);
+    private final HashMap<String, Boolean> fileRead = new HashMap<String, Boolean>(26);
     private Button mClearButton;
     private Button mBackButton;
     private Button mAcknowledgementButton;
     private MediaPlayer mp;
     private TextView mAcknowledgementTextView;
+    private String startingLetter = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,34 @@ public class DictionaryActivity extends Activity {
         actionBar.setTitle("Test Dictionary");
 
 
-        readFile();
+        fileRead.put("a",false);
+        fileRead.put("b",false);
+        fileRead.put("c",false);
+        fileRead.put("d",false);
+        fileRead.put("e",false);
+        fileRead.put("f",false);
+        fileRead.put("g",false);
+        fileRead.put("h",false);
+        fileRead.put("i",false);
+        fileRead.put("j",false);
+        fileRead.put("k",false);
+        fileRead.put("l",false);
+        fileRead.put("m",false);
+        fileRead.put("n",false);
+        fileRead.put("o",false);
+        fileRead.put("p",false);
+        fileRead.put("q",false);
+        fileRead.put("r",false);
+        fileRead.put("s",false);
+        fileRead.put("t",false);
+        fileRead.put("u",false);
+        fileRead.put("v",false);
+        fileRead.put("w",false);
+        fileRead.put("x",false);
+        fileRead.put("y",false);
+        fileRead.put("z",false);
+
+
 
         mEditText = (EditText)findViewById(R.id.dictionary_search);
         mTextView = (TextView)findViewById(R.id.dictionary_results);
@@ -72,16 +103,29 @@ public class DictionaryActivity extends Activity {
             @Override
             public void afterTextChanged(Editable s)
             {
+
+                if (s.toString().length() > 0)
+                {
+                    startingLetter = s.toString().substring(0, 1);
+                }
+
+                if (fileRead.get(startingLetter) == false)
+                {
+
+                    readFile(startingLetter);
+                    fileRead.put(startingLetter, true);
+                }
+
                 //right after text is changed
                 if (s.toString().length() > 2)
                 {
-                    if (words2.containsKey(s.toString()))
+                    if (words.containsKey(s.toString()))
                     {
                         if (mp != null)
                         {
                             mp.release();
                         }
-                        mTextView.append(words2.get(s.toString()) + "\n");
+                        mTextView.append(words.get(s.toString()) + "\n");
                         playChime();
                     }
 
@@ -120,12 +164,14 @@ public class DictionaryActivity extends Activity {
 
     }
 
-    private boolean readFile() {
+    private boolean readFile(String letter) {
+
+        String file = letter + ".txt";
 
         try {
             AssetManager am = getAssets();
 
-            InputStream inputStream = am.open("wordlist.txt");
+            InputStream inputStream = am.open(file);
 
             if (inputStream != null)
             {
@@ -138,7 +184,7 @@ public class DictionaryActivity extends Activity {
                     if (receiveString.length() >= 3)
                     {
 
-                        words2.put(receiveString, receiveString);
+                        words.put(receiveString, receiveString);
                     }
 
                 }
@@ -165,6 +211,8 @@ public class DictionaryActivity extends Activity {
         mp = MediaPlayer.create(this, R.raw.chime);
         mp.start();
     }
+
+
 
 
 }
