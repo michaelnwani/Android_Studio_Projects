@@ -1,0 +1,5 @@
+/Users/michaelnwani/AndroidStudioProjects/LocationTest/app/build/intermediates/classes/debug
+/Users/michaelnwani/AndroidStudioProjects/LocationTest/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-af3ab145bbaf68a0e635383b77449014bdd83f2d.jar
+/Users/michaelnwani/AndroidStudioProjects/LocationTest/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-7b5a3385145c1dde65754c22e21b6d8ce0d19227.jar
+/Users/michaelnwani/AndroidStudioProjects/LocationTest/app/build/intermediates/pre-dexed/debug/classes-1fff875bea43d272eba82e8b38adc10b9bf27298.jar
+/Users/michaelnwani/AndroidStudioProjects/LocationTest/app/build/intermediates/pre-dexed/debug/classes-03f7c05588cad6bcaa57eeedec8367dcade53eee.jar
