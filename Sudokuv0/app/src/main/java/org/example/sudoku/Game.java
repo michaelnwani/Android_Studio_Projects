@@ -52,7 +52,7 @@ public class Game extends Activity {
         puzzleView.requestFocus();
 
         // ...
-        // If the activity is restarded, do a continue next time
+        // If the activity is restarted, do a continue next time
         getIntent().putExtra(KEY_DIFFICULTY, DIFFICULTY_CONTINUE);
     }
 

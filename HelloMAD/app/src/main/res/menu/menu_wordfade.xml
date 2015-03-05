@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/split"
+        android:title="@string/split_label"
+        android:alphabeticShortcut="@string/settings_shortcut" />
+    <item android:id="@+id/dump"
+        android:title="@string/dump_label"
+        android:alphabeticShortcut="@string/dump_shortcut" />
+
+</menu>

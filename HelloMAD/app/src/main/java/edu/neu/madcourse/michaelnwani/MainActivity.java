@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
     private Button mQuitButton;
     private Button mErrorButton;
     private Button mDictionaryButton;
+    private Button mWordFadeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +33,10 @@ public class MainActivity extends Activity {
         mSudokuButton = (Button)findViewById(R.id.sudoku_button);
         mQuitButton = (Button)findViewById(R.id.quit_button);
 
+
         mErrorButton = (Button)findViewById(R.id.error_button);
         mDictionaryButton = (Button)findViewById(R.id.dictionary_button);
+        mWordFadeButton = (Button)findViewById(R.id.wordfade_button);
 
         mAboutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +78,17 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, DictionaryActivity.class);
                 startActivity(i);
+            }
+        });
+
+        mWordFadeButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v)
+            {
+                Intent i = new Intent(MainActivity.this, WordFadeActivity.class);
+                startActivity(i);
+
             }
         });
 

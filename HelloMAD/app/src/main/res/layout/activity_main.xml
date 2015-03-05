@@ -39,6 +39,13 @@
             android:textSize="24sp" />
 
         <Button
+            android:id="@+id/wordfade_button"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/wordfade_button"
+            android:textSize="24sp"/>
+
+        <Button
             android:id="@+id/quit_button"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"

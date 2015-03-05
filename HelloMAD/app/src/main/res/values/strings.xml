@@ -57,4 +57,15 @@ row, each column, and each of the 3x3 boxes
         1) I have no images/icons/graphics I didn\'t design myself.\n 2) I got inspiration for my readFile() from: http://stackoverflow.com/questions/14376807/how-to-read-write-string-from-a-file-in-android.\n 3) I didn\'t ask anyone for help.</string>
     <string name="loading_text">\
     Loading... please wait</string>
+    <string name="letterpad_title">Letter Rack</string>
+    <string name="wordfade_button">WordFade</string>
+    <string name="dump_shortcut">d</string>
+    <string name="split_label">Split!</string>
+    <string name="dump_label">Dump!</string>
+    <string name="dumppad_title">Enter the letter to discard</string>
+    <string name="dumppad_text">Discard Letter: </string>
+    <string name="dump_button_text">Dump!</string>
+    <string name="split_button_text"></string>
+    <string name="splitpad_text"></string>
+    <string name="dump_not_allowed">Need 18 letters or less to dump!</string>
 </resources>
