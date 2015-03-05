@@ -18,6 +18,6 @@ public class SimpleReceiver extends BroadcastReceiver {
         else if (Intent.ACTION_POWER_DISCONNECTED.equals(intent.getAction())){
             message = "Being unplugged makes me hangry.";
         }
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+//        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 }
