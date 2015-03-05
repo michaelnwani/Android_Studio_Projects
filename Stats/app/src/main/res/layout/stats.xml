@@ -22,7 +22,7 @@
             android:layout_below="@+id/img_battery"
             android:max="100"
             android:paddingTop="5dp"
-            android:progress="50"
+            android:progress="100"
             android:progressDrawable="@drawable/battery_level"/>
 
         <TextView android:id="@+id/battery_voltage"

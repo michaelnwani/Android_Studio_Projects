@@ -39,7 +39,7 @@ public class StatsService extends Service {
             mLiveCard.setAction(buildAction());
             mLiveCard.publish(PublishMode.REVEAL);
 
-            buildReceiver(rv);
+            buildReceiver(remoteViews());
 
         }
         return START_STICKY;
@@ -50,6 +50,8 @@ public class StatsService extends Service {
         if (mLiveCard != null && mLiveCard.isPublished()) {
             mLiveCard.unpublish();
             mLiveCard = null;
+
+            unregisterReceiver(receiver);
         }
         super.onDestroy();
     }
@@ -62,6 +64,8 @@ public class StatsService extends Service {
             Configuration config = getResources().getConfiguration();
             rv.setTextViewText(R.id.language, config.locale.getDisplayLanguage());
             rv.setTextViewText(R.id.country, config.locale.getDisplayCountry());
+
+            rv.setProgressBar(R.id.battery_level, 100, 100, false);
         }
 
         return rv;

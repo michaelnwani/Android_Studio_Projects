@@ -46,7 +46,7 @@ public final class StatsUtil {
 
     public static float getDegrees(Intent intent){
         //EXTRA_TEMPERATURE is the battery temperature in tenths of a degree C
-        return intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0);
+        return intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0) / 10;
     }
 
     public static float getVoltage(Intent intent){
