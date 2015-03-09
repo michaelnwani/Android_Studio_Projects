@@ -68,4 +68,37 @@ row, each column, and each of the 3x3 boxes
     <string name="split_button_text"></string>
     <string name="splitpad_text"></string>
     <string name="dump_not_allowed">Need 18 letters or less to dump!</string>
+    <string name="split_not_allowed">Need less than 21 letters in your rack</string>
+    <string name="words_must_be_connected">Words must be connected</string>
+    <string name="up_shortcut">w</string>
+    <string name="down_shortcut">s</string>
+    <string name="left_shortcut">a</string>
+    <string name="right_shortcut">d</string>
+    <string name="up_label">up</string>
+    <string name="down_label">down</string>
+    <string name="right_label">right</string>
+    <string name="left_label">left</string>
+    <string name="game_over">Game Over!</string>
+    <string name="game_over2">Game over from having negative points!</string>
+    <string name="quit_label">Quit</string>
+    <string name="quit_shortcut">q</string>
+    <string name="pause_label">Pause</string>
+    <string name="resume_label">Resume</string>
+    <string name="wf_acknowledgement_button">Acknowledgements</string>
+    <string name="instructions_button">How to Play</string>
+    <string name="begin_game_button">Play!</string>
+    <string name="exit_button">Exit</string>
+    <string name="wf_acknowledgement_text">Online Help 1:\n http://stackoverflow.com/questions/363681/generating-random-integers-in-a-range-with-java \n
+    Online Help 2:\n http://stackoverflow.com/questions/9030268/set-visibility-in-menu-programatically-android \n
+    Other help suggestions came from TA\'s Ameya and Zhongjie.
+
+    </string>
+    <string name="wf_instructions_text">Use your letters rack to make as many words as possible by connecting letters together! \n
+        Just tap a tile with your finger to open your rack, and tap on a letter to place the letter on the rack. \n
+        When you make a word, you have 10 seconds to make another word before time runs out and it\'s game over!</string>
+    <string name="music_options">Music Options</string>
+    <string name="on_label">On</string>
+    <string name="off_label">Off</string>
+
+
 </resources>

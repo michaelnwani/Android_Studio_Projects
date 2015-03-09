@@ -86,7 +86,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v)
             {
-                Intent i = new Intent(MainActivity.this, WordFadeActivity.class);
+                Intent i = new Intent(MainActivity.this, WordFadeMenuActivity.class);
                 startActivity(i);
 
             }

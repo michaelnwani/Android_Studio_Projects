@@ -13,4 +13,8 @@
       <item>@string/medium_label</item>
       <item>@string/hard_label</item>
    </array>
+    <array name="music_options">
+        <item>@string/on_label</item>
+        <item>@string/off_label</item>
+    </array>
 </resources>

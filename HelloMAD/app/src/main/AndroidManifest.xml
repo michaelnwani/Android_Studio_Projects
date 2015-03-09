@@ -29,6 +29,11 @@
             android:screenOrientation="portrait">
 
         </activity>
+        <activity
+            android:name=".WordFadeMenuActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity android:name=".org.example.sudoku.Sudoku"
             android:label="@string/sudoku_app_name">
         </activity>

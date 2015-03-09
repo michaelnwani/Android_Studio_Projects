@@ -2,6 +2,7 @@ package edu.neu.madcourse.michaelnwani;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -20,26 +21,24 @@ public class LetterPad extends Dialog {
 
     protected static final String TAG = "LETTERPAD";
 
-    private final Button letters[] = new Button[24];
+    private static final Button letters[] = new Button[24];
     private View letterpad;
     public static int blankLetterInt = -1;
     public static int lettersCount = 21;
     private static HashMap<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
-    private static HashMap<Integer, String> letterHashMap = new HashMap<Integer, String>();
+
 
 //    private final int useds[];
     private final BoardView boardView;
     private final WordFadeActivity game;
     private String letterReplace = "";
     public boolean dumpLetter = false;
-//    private final ArrayList<String> letterPoints = new ArrayList<String>(26);
+    private MediaPlayer mp;
 
-//    public LetterPad(Context context, int useds[], BoardView boardView)
-//    {
-//        super(context);
-//        this.useds = useds;
-//        this.boardView = boardView;
-//    }
+
+    public int getLettersCount(){
+        return lettersCount;
+    }
 
     public LetterPad(Context context, BoardView boardView)
     {
@@ -59,7 +58,6 @@ public class LetterPad extends Dialog {
 
         Log.d(TAG, "dumpLetter in the constructor is " + dumpLetter);
 
-//        dumpMethodIntermediary();
     }
 
     @Override
@@ -70,14 +68,7 @@ public class LetterPad extends Dialog {
         setContentView(R.layout.letterpad);
 
         findViews();
-//        findViews(blankLetterInt);
-//        for (int element : useds)
-//        {
-//            if (element != 0)
-//            {
-//                letters[element - 1].setVisibility(View.INVISIBLE);
-//            }
-//        }
+
         setListeners();
 
 
@@ -575,30 +566,6 @@ public class LetterPad extends Dialog {
                     letterReplace = "";
 
 
-
-
-//                    outerloop2:
-//                    for (int index = 0; index < letters.length; index++){
-//                        if (letters[index].getText().toString().equals("")){
-////                            Log.d(TAG, "letterPoints size is: " + letterPoints.size());
-//                            int randomIndex = game.randInt(0, 25);
-//                            hashMap.remove(index);
-//                            letters[index].setText(game.getLetterFromLetterPoints(randomIndex));
-//                            break outerloop2;
-//                        }
-//                    }
-
-//                    outerloop3:
-//                    for (int index = 0; index < letters.length; index++){
-//                        if (letters[index].getText().toString().equals("")){
-////                            Log.d(TAG, "letterPoints size is: " + letterPoints.size());
-//                            int randomIndex = game.randInt(0, 25);
-//                            hashMap.remove(index);
-//                            letters[index].setText(game.getLetterFromLetterPoints(randomIndex));
-//                            break outerloop3;
-//                        }
-//                    }
-
                 }
                 else{
                     Log.d(TAG, "lettersCount > 18; not allowed");
@@ -621,29 +588,6 @@ public class LetterPad extends Dialog {
         Log.d(TAG, "At the end of findViews(); lettersCount is now " + lettersCount);
         Log.d(TAG, "Inside findViews(); testing this is being called");
 
-//        letters[0] = (Button) findViewById(R.id.letter_1);
-////        letters[0].setText("Test"); IS POSSIBLE
-//        letters[1] = (Button) findViewById(R.id.letter_2);
-//        letters[2] = (Button) findViewById(R.id.letter_3);
-//        letters[3] = (Button) findViewById(R.id.letter_4);
-//        letters[4] = (Button) findViewById(R.id.letter_5);
-//        letters[5] = (Button) findViewById(R.id.letter_6);
-//        letters[6] = (Button) findViewById(R.id.letter_7);
-//        letters[7] = (Button) findViewById(R.id.letter_8);
-//        letters[8] = (Button) findViewById(R.id.letter_9);
-//        letters[9] = (Button) findViewById(R.id.letter_10);
-//        letters[10] = (Button) findViewById(R.id.letter_11);
-//        letters[11] = (Button) findViewById(R.id.letter_12);
-//        letters[12] = (Button) findViewById(R.id.letter_13);
-//        letters[13] = (Button) findViewById(R.id.letter_14);
-//        letters[14] = (Button) findViewById(R.id.letter_15);
-//        letters[15] = (Button) findViewById(R.id.letter_16);
-//        letters[16] = (Button) findViewById(R.id.letter_17);
-//        letters[17] = (Button) findViewById(R.id.letter_18);
-//        letters[18] = (Button) findViewById(R.id.letter_19);
-//        letters[19] = (Button) findViewById(R.id.letter_20);
-//        letters[20] = (Button) findViewById(R.id.letter_21);
-
 
     }
 
@@ -663,6 +607,9 @@ public class LetterPad extends Dialog {
 
                     returnResult(t);
                     blankLetterInt = k;
+//                    if (invalidLetterBool == true){
+//                        blankLetterInt = -1;
+//                    }
                     hashMap.put(blankLetterInt, blankLetterInt);
                     Log.d(TAG, "blankLetterInt is " + blankLetterInt);
                 }
@@ -680,6 +627,7 @@ public class LetterPad extends Dialog {
 
 
     }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -729,21 +677,14 @@ public class LetterPad extends Dialog {
 
     }
 
-//    private boolean isValid(int tile)
-//    {
-//        for (int t : useds)
-//        {
-//            if (tile == t)
-//            {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
-
-
-    private void returnResult(String tile)
+    protected void returnResult(String tile)
     {
+        if (mp != null)
+        {
+            mp.release();
+        }
+        playLetterChime();
+
         boardView.setSelectedTile(tile);
         dismiss();
     }
@@ -877,6 +818,8 @@ public class LetterPad extends Dialog {
                     hashMap.remove(i);
 
                     game.putLetterHashMap(i, game.getLetterFromLetterPoints(randomIndex));
+                    //game.subtractpoints based on letter
+                    game.subtractPoints(game.getLetterHashMap(i));
 //                    letterHashMap.put(i, game.getLetterFromLetterPoints(randomIndex));
                     letters[i].setText(game.getLetterHashMap(i));
 
@@ -885,6 +828,150 @@ public class LetterPad extends Dialog {
             }
 
         }
+    }
+
+    public void splitOperation(){
+        for (int i = 0; i < letters.length; i++){
+            if (letters[i] == null){
+                Log.d(TAG, "What the fuck? Anyway i is: " + i);
+                //just fucking initialize it here
+                switch (i){
+                    case 0:
+                        letters[0] = (Button) findViewById(R.id.letter_1);
+                        letters[0].setText(game.getLetterHashMap(0));
+
+                        break;
+                    case 1:
+                        letters[1] = (Button) findViewById(R.id.letter_2);
+                        letters[1].setText(game.getLetterHashMap(1));
+                        break;
+                    case 2:
+                        letters[2] = (Button) findViewById(R.id.letter_3);
+                        letters[2].setText(game.getLetterHashMap(2));
+                        break;
+                    case 3:
+                        letters[3] = (Button) findViewById(R.id.letter_4);
+                        letters[3].setText(game.getLetterHashMap(3));
+                        break;
+                    case 4:
+                        letters[4] = (Button) findViewById(R.id.letter_5);
+                        letters[4].setText(game.getLetterHashMap(4));
+                        break;
+                    case 5:
+                        letters[5] = (Button) findViewById(R.id.letter_6);
+                        letters[5].setText(game.getLetterHashMap(5));
+                        break;
+                    case 6:
+                        letters[6] = (Button) findViewById(R.id.letter_7);
+                        letters[6].setText(game.getLetterHashMap(6));
+                        break;
+                    case 7:
+                        letters[7] = (Button) findViewById(R.id.letter_8);
+                        letters[7].setText(game.getLetterHashMap(7));
+                        break;
+                    case 8:
+                        letters[8] = (Button) findViewById(R.id.letter_9);
+                        letters[8].setText(game.getLetterHashMap(8));
+                        break;
+                    case 9:
+                        letters[9] = (Button) findViewById(R.id.letter_10);
+                        letters[9].setText(game.getLetterHashMap(9));
+                        break;
+                    case 10:
+                        letters[10] = (Button) findViewById(R.id.letter_11);
+                        letters[10].setText(game.getLetterHashMap(10));
+                        break;
+                    case 11:
+                        letters[11] = (Button) findViewById(R.id.letter_12);
+                        letters[11].setText(game.getLetterHashMap(11));
+                        break;
+                    case 12:
+                        letters[12] = (Button) findViewById(R.id.letter_13);
+                        letters[12].setText(game.getLetterHashMap(12));
+                        break;
+                    case 13:
+                        letters[13] = (Button) findViewById(R.id.letter_14);
+                        letters[13].setText(game.getLetterHashMap(13));
+                        break;
+                    case 14:
+                        letters[14] = (Button) findViewById(R.id.letter_15);
+                        letters[14].setText(game.getLetterHashMap(14));
+                        break;
+                    case 15:
+                        letters[15] = (Button) findViewById(R.id.letter_16);
+                        letters[15].setText(game.getLetterHashMap(15));
+                        break;
+                    case 16:
+                        letters[16] = (Button) findViewById(R.id.letter_17);
+                        letters[16].setText(game.getLetterHashMap(16));
+                        break;
+                    case 17:
+                        letters[17] = (Button) findViewById(R.id.letter_18);
+                        letters[17].setText(game.getLetterHashMap(17));
+                        break;
+                    case 18:
+                        letters[18] = (Button) findViewById(R.id.letter_19);
+                        letters[18].setText(game.getLetterHashMap(18));
+                        break;
+                    case 19:
+                        letters[19] = (Button) findViewById(R.id.letter_20);
+                        letters[19].setText(game.getLetterHashMap(19));
+                        break;
+                    case 20:
+                        letters[20] = (Button) findViewById(R.id.letter_21);
+                        letters[20].setText(game.getLetterHashMap(20));
+                        break;
+                    case 21:
+                        letters[21] = (Button) findViewById(R.id.letter_22);
+
+                        break;
+                    case 22:
+                        letters[22] = (Button) findViewById(R.id.letter_23);
+
+                        break;
+                    case 23:
+                        letters[23] = (Button) findViewById(R.id.letter_24);
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (letters[i] != null){
+                if (letters[i].getText().toString().equals("")){
+//                            Log.d(TAG, "letterPoints size is: " + letterPoints.size());
+                    int randomIndex = game.randInt(0, 25);
+                    hashMap.remove(i);
+
+                    game.putLetterHashMap(i, game.getLetterFromLetterPoints(randomIndex));
+
+
+//                    letterHashMap.put(i, game.getLetterFromLetterPoints(randomIndex));
+                    letters[i].setText(game.getLetterHashMap(i));
+
+                    break;
+                }
+            }
+
+        }
+    }
+
+    protected void rollBackHashMap(String str){
+        hashMap.remove(blankLetterInt);
+
+        game.putLetterHashMap(blankLetterInt, str);
+        Log.d(TAG, "BLANKLETTERINT: " + blankLetterInt);
+        blankLetterInt = -1;
+        Log.d(TAG, "BLANKLETTERINT: " + blankLetterInt);
+
+
+    }
+
+    public void playLetterChime()
+    {
+        //Create a new MediaPlayer to play this sound
+        mp = MediaPlayer.create(game, R.raw.chomp);
+        mp.start();
     }
 
 }

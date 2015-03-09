@@ -3,8 +3,11 @@ package edu.neu.madcourse.michaelnwani;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.res.AssetManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -24,37 +27,23 @@ import java.util.HashMap;
 import java.util.Random;
 
 
+
+
 /**
  * Created by michaelnwani on 2/25/15.
  */
 public class WordFadeActivity extends Activity {
-    private final Button letters[] = new Button[21];
     private final ArrayList<String> letterPoints = new ArrayList<String>(26);
-    private int points;
+    private int lettersCount = 21;
+    public int points;
+    public static final String MUSIC_OPTION =
+            "edu.neu.madcourse.michaelnwani";
 
 //    private int puzzle[] = new int[9 * 9];
-    private String puzzle[] = new String[9 * 9];
+    private String puzzle[] = new String[4000]; //3969
 
     private BoardView boardView;
     private static Random rand = new Random();
-
-    public static final String KEY_DIFFICULTY = "org.example.sudoku.difficulty";
-    public static final int DIFFICULTY_EASY = 0;
-    public static final int DIFFICULTY_MEDIUM = 1;
-    public static final int DIFFICULTY_HARD = 2;
-
-    private final String easyPuzzle =
-            "360000000004230800000004200" +
-                    "070460003820000014500013020" +
-                    "001900000007048300000000045";
-    private final String mediumPuzzle =
-            "650000070000506000014000005" +
-                    "007009000002314700000700800" +
-                    "500000630000201000030000097";
-    private final String hardPuzzle =
-            "009000000080605020501078000" +
-                    "000000700706040102004000000" +
-                    "000720903090301080000000600";
 
     private final HashMap<String, Boolean> fileRead = new HashMap<String, Boolean>(26);
     private static final String TAG = "TESTING fileRead";
@@ -64,25 +53,23 @@ public class WordFadeActivity extends Activity {
     private final ArrayList<String> placedWords = new ArrayList<String>();
     private ActionBar actionBar;
     private static HashMap<Integer, String> letterHashMap = new HashMap<Integer, String>();
+    private static boolean toggleMenuItem = true;
+    private static int opt;
+    private MediaPlayer mp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
           actionBar = getActionBar();
 
-//        actionBar.setTitle("Points: " + points);
-
-
         initializeAlphabet();
         fillLetterHashMap();
-//        findLetters();
-//        assignLettersToRack();
-//        calculatePoints();
+        //0 is on
+        //1 is off
 
-//        int diff = getIntent().getIntExtra(KEY_DIFFICULTY, DIFFICULTY_EASY);
-//        puzzle = getPuzzle(1);
+        opt = getIntent().getIntExtra(MUSIC_OPTION, 1);
 
-//        calculateUsedTiles();
 
         fileRead.put("a",false);
         fileRead.put("b",false);
@@ -114,6 +101,28 @@ public class WordFadeActivity extends Activity {
         boardView = new BoardView(this);
         setContentView(boardView);
         boardView.requestFocus();
+
+        // If the activity is restarted, do a continue next time
+        getIntent().putExtra(MUSIC_OPTION, 1);
+
+
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem resumeButton = menu.findItem(R.id.resume);
+        MenuItem pauseButton = menu.findItem(R.id.pause);
+
+        if (toggleMenuItem){ //if this is false
+            resumeButton.setVisible(false);
+            pauseButton.setVisible(true);
+        }
+        else{
+            resumeButton.setVisible(true);
+            pauseButton.setVisible(false);
+        }
+
+        return true;
     }
 
     @Override
@@ -129,20 +138,90 @@ public class WordFadeActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Dialog dump = new DumpPad(this, boardView);
+
+
         switch (item.getItemId()){
             case R.id.split:
+                splitOperation();
 
-//                split.show();
                 return true;
             case R.id.dump:
-//                Dialog v = new LetterPad(this, boardView);
-//                v.show();
+
                 dump.show();
-                //handle soon
+
                 return true;
+            case R.id.up:
+                boardView.shiftUp();
+                return true;
+            case R.id.down:
+                boardView.shiftDown();
+                return true;
+            case R.id.left:
+                boardView.shiftLeft();
+                return true;
+            case R.id.right:
+                boardView.shiftRight();
+                return true;
+            case R.id.quit:
+                finish();
+                return true;
+            case R.id.resume:
+
+                toggleMenuItem = true;
+                boardView.setPause(false);
+                return true;
+            case R.id.pause:
+
+                toggleMenuItem = false;
+                boardView.setPause(true);
+                return true;
+
 
         }
         return false;
+    }
+
+    private void splitOperation(){
+        LetterPad letterPad = new LetterPad(this, boardView);
+//        letterPad.initializeLetters();
+        lettersCount = letterPad.getLettersCount();
+        if (lettersCount == 21){
+
+            Toast toast = Toast.makeText(this, R.string.split_not_allowed, Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
+        else if (lettersCount >= 11 && lettersCount < 21){
+            letterPad.splitOperation();
+            addPoints(-5);
+
+        }
+        else if (lettersCount >= 5 && lettersCount < 11){
+            letterPad.splitOperation();
+
+        }
+        else if (lettersCount == 4){
+            letterPad.splitOperation();
+            addPoints(4);
+        }
+        else if (lettersCount == 3){
+            letterPad.splitOperation();
+            addPoints(6);
+        }
+        else if (lettersCount == 2){
+            letterPad.splitOperation();
+            addPoints(8);
+        }
+        else if (lettersCount == 1){
+            letterPad.splitOperation();
+            addPoints(10);
+
+        }
+        else if (lettersCount == 0){
+            letterPad.splitOperation();
+            addPoints(15);
+        }
+//        Log.d(TAG2, "LETTERSCOUNT IN WORDFADEACTIVITY IS " + letterPad.getLettersCount());
     }
 
     private void initializeAlphabet()
@@ -180,45 +259,6 @@ public class WordFadeActivity extends Activity {
         return letterPoints.get(index);
     }
 
-    private void findLetters()
-    {
-
-        letters[0] = (Button) findViewById(R.id.letter_1);
-        letters[1] = (Button) findViewById(R.id.letter_2);
-        letters[2] = (Button) findViewById(R.id.letter_3);
-        letters[3] = (Button) findViewById(R.id.letter_4);
-        letters[4] = (Button) findViewById(R.id.letter_5);
-        letters[5] = (Button) findViewById(R.id.letter_6);
-        letters[6] = (Button) findViewById(R.id.letter_7);
-        letters[7] = (Button) findViewById(R.id.letter_8);
-        letters[8] = (Button) findViewById(R.id.letter_9);
-        letters[9] = (Button) findViewById(R.id.letter_10);
-        letters[10] = (Button) findViewById(R.id.letter_11);
-        letters[11] = (Button) findViewById(R.id.letter_12);
-        letters[12] = (Button) findViewById(R.id.letter_13);
-        letters[13] = (Button) findViewById(R.id.letter_14);
-        letters[14] = (Button) findViewById(R.id.letter_15);
-        letters[15] = (Button) findViewById(R.id.letter_16);
-        letters[16] = (Button) findViewById(R.id.letter_17);
-        letters[17] = (Button) findViewById(R.id.letter_18);
-        letters[18] = (Button) findViewById(R.id.letter_19);
-        letters[19] = (Button) findViewById(R.id.letter_20);
-        letters[20] = (Button) findViewById(R.id.letter_21);
-    }
-
-    private void assignLettersToRack()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            //get a random integer value from 0 to 25
-            //letters[i].setText(string from random indexing of dataset)
-            int randomNumber = randInt(0, 25);
-            letters[i].getText();
-
-
-        }
-
-    }
 
     //Awesome helper method.
     //Source: http://stackoverflow.com/questions/363681/generating-random-integers-in-a-range-with-java
@@ -320,8 +360,20 @@ public class WordFadeActivity extends Activity {
                         break;
                 }
             }
-            actionBar.setTitle("Points: " + points);
+
+
+
+            LetterPad letterPad = new LetterPad(this, boardView);
+            lettersCount = letterPad.getLettersCount() - 1;
+
+            actionBar.setTitle("Points: " + points + "  Letters in rack: " + lettersCount);
             placedWords.add(word);
+
+            if (mp != null)
+            {
+                mp.release();
+            }
+            playChime();
         }
 
     }
@@ -329,193 +381,62 @@ public class WordFadeActivity extends Activity {
 
     protected void showKeypadOrError(int x, int y)
     {
-//        int tiles[] = getUsedTiles(x, y);
-//        if (tiles.length == 9)
-//        {
-//            Toast toast = Toast.makeText(this, R.string.no_moves_label, Toast.LENGTH_SHORT);
-//            toast.setGravity(Gravity.CENTER, 0, 0);
-//            toast.show();
-//        }
-//        else
-//        {
 
-//            Dialog v = new LetterPad(this, tiles, boardView);
             Dialog letterPad = new LetterPad(this, boardView);
             letterPad.show();
-//        }
+
     }
 
     protected boolean setTileIfValid(int x, int y, String value)
     {
-        int tiles[] = getUsedTiles(x, y);
-//        if (value != 0)
-//        {
-//            for (int tile : tiles)
-//            {
-//                if (tile == value)
-//                    return false;
-//            }
-//        }
-        setTile(x, y, value);
-//        calculateUsedTiles();
-        return true;
+
+        if (getTile(x, y).equals(value)){
+            //do something to refresh
+            boardView.refreshWord(x, y);
+            return true;
+        }
+        else{
+            setTile(x, y, value);
+
+            return true;
+        }
+
     }
 
-    private final int used[][][] = new int[9][9][];
+    private final int used[][][] = new int[100][100][];
 
     protected int[] getUsedTiles(int x, int y)
     {
         return used[x][y];
     }
 
-//    private void calculateUsedTiles()
-//    {
-//        for (int x = 0; x < 9; x++)
-//        {
-//            for (int y = 0; y < 9; y++)
-//            {
-//                used[x][y] = calculateUsedTiles(x, y);
-//                //Log.d(TAG, "used[" + x + "][" + y + "] = "
-//                //+ toPuzzleString(used[x][y]));
-//            }
-//        }
-//    }
-
-//    private int[] calculateUsedTiles(int x, int y)
-//    {
-//        int c[] = new int[9];
-//        //horizontal
-//        for (int i = 0; i < 9; i++)
-//        {
-//            if (i == y)
-//                continue;
-//            int t = getTile(x, i);
-//            if (t != 0)
-//            {
-//                c[t-1] = t;
-//            }
-//        }
-//
-//        //vertical
-//        for (int i = 0; i < 9; i++)
-//        {
-//            if (i == x)
-//                continue;
-//            int t = getTile(i, y);
-//            if (t != 0)
-//            {
-//                c[t-1] = t;
-//            }
-//        }
-//
-//        //same cell block
-//        int startx = (x / 3) * 3;
-//        int starty = (y / 3) * 3;
-//        for (int i = startx; i < startx + 3; i++)
-//        {
-//            for (int j = starty; j < starty + 3; j++)
-//            {
-//                if (i == x && j == y)
-//                {
-//                    continue;
-//                }
-//                int t = getTile(i, j);
-//                if (t != 0)
-//                {
-//                    c[t - 1] = t;
-//                }
-//            }
-//        }
-//
-//        //compress
-//        int nused = 0;
-//        for (int t : c)
-//        {
-//            if (t != 0)
-//            {
-//                nused++;
-//            }
-//        }
-//        int c1[] = new int[nused];
-//        nused = 0;
-//        for (int t : c)
-//        {
-//            if (t != 0)
-//            {
-//                c1[nused++] = t;
-//            }
-//        }
-//        return c1;
-//    }
-
-
-
     private String getTile(int x, int y)
     {
-        return puzzle[y * 9 + x]; //y * 9 tells you what row to go to; + x to get to the column
+        if (puzzle[y * 63 + x] != null || puzzle[y * 63 + x] == ""){
+            return puzzle[y * 63 + x]; //y * 9 tells you what row to go to; + x to get to the column
+        }
+        else{
+            puzzle[y * 63 + x] = "";
+            return puzzle[y * 63 + x];
+
+        }
+
     }
 
     private void setTile(int x, int y, String value)
     {
-        puzzle[y * 9 + x] = value;
+
+        puzzle[y * 63 + x] = value;
+
     }
 
     protected String getTileString(int x, int y)
     {
-//        int v = getTile(x, y);
-//        if (v == 0) //that means the tile is blank
-//            return "";
-//        else
-//            return String.valueOf(v);
 
-        return puzzle[y * 9 + x];
+        return puzzle[y * 63 + x];
 
     }
 
-    private int[] getPuzzle(int diff)
-    {
-        String puz;
-        switch (diff)
-        {
-//            case DIFFICULTY_CONTINUE:
-//                puz = getPreferences(MODE_PRIVATE).getString(PREF_PUZZLE, easyPuzzle);
-//                break;
-            case DIFFICULTY_HARD:
-                puz = hardPuzzle;
-                break;
-            case DIFFICULTY_MEDIUM:
-                puz = mediumPuzzle;
-                break;
-            case DIFFICULTY_EASY:
-            default:
-                puz = easyPuzzle;
-                break;
-        }
-
-        return fromPuzzleString(puz);
-    }
-
-    static private String toPuzzleString(int[] puz)
-    {
-        StringBuilder buf = new StringBuilder();
-        for (int element : puz)
-        {
-            buf.append(element);
-        }
-        return buf.toString();
-    }
-
-    static protected int[] fromPuzzleString(String string)
-    {
-        int[] puz = new int[string.length()];
-        for (int i = 0; i < puz.length; i++)
-        {
-            //turn a char to its unicode form; String.valueOf() to get opposite
-            puz[i] = string.charAt(i) - '0';
-        }
-
-        return puz;
-    }
 
     public boolean fileRead(String startingLetter){
         if (fileRead.get(startingLetter) == false){
@@ -530,10 +451,6 @@ public class WordFadeActivity extends Activity {
         }
 
         return false;
-    }
-
-    public void fileReadPut(String startingLetter, boolean b){
-        fileRead.put(startingLetter, b);
     }
 
     public boolean readFile(String letter) {
@@ -635,27 +552,160 @@ public class WordFadeActivity extends Activity {
         return letterHashMap.get(index);
     }
 
-//    letters[0] = findViewById(R.id.letter_1);
-//    letters[1] = findViewById(R.id.letter_2);
-//    letters[2] = findViewById(R.id.letter_3);
-//    letters[3] = findViewById(R.id.letter_4);
-//    letters[4] = findViewById(R.id.letter_5);
-//    letters[5] = findViewById(R.id.letter_6);
-//    letters[6] = findViewById(R.id.letter_7);
-//    letters[7] = findViewById(R.id.letter_8);
-//    letters[8] = findViewById(R.id.letter_9);
-//    letters[9] = findViewById(R.id.letter_10);
-//    letters[10] = findViewById(R.id.letter_11);
-//    letters[11] = findViewById(R.id.letter_12);
-//    letters[12] = findViewById(R.id.letter_13);
-//    letters[13] = findViewById(R.id.letter_14);
-//    letters[14] = findViewById(R.id.letter_15);
-//    letters[15] = findViewById(R.id.letter_16);
-//    letters[16] = findViewById(R.id.letter_17);
-//    letters[17] = findViewById(R.id.letter_18);
-//    letters[18] = findViewById(R.id.letter_19);
-//    letters[19] = findViewById(R.id.letter_20);
-//    letters[20] = findViewById(R.id.letter_21);
+    public void subtractPoints(String letter)
+    {
+        switch (letter.charAt(0))
+        {
+            case 'a':
+                points -= (1 * 2);
+                break;
+            case 'b':
+                points -= (3 * 2);
+                break;
+            case 'c':
+                points -= (3 * 2);
+                break;
+            case 'd':
+                points -= (2 * 2);
+                break;
+            case 'e':
+                points -= (1 * 2);
+                break;
+            case 'f':
+                points -= (4 * 2);
+                break;
+            case 'g':
+                points -= (2 * 2);
+                break;
+            case 'h':
+                points -= (4 * 2);
+                break;
+            case 'i':
+                points -= (1 * 2);
+                break;
+            case 'j':
+                points -= (8 * 2);
+                break;
+            case 'k':
+                points -= (5 *2);
+                break;
+            case 'l':
+                points -= (1 * 2);
+                break;
+            case 'm':
+                points -= (3 * 2);
+                break;
+            case 'n':
+                points -= (1 * 2);
+                break;
+            case 'o':
+                points -= (1 * 2);
+                break;
+            case 'p':
+                points -= (3 * 2);
+                break;
+            case 'q':
+                points -= (10 * 2);
+                break;
+            case 'r':
+                points -= (1 * 2);
+                break;
+            case 's':
+                points -= (1 * 2);
+                break;
+            case 't':
+                points -= (1 * 2);
+                break;
+            case 'u':
+                points -= (1 * 2);
+                break;
+            case 'v':
+                points -= (4 * 2);
+                break;
+            case 'w':
+                points -= (4 * 2);
+                break;
+            case 'x':
+                points -= (8 * 2);
+                break;
+            case 'y':
+                points -= (4 * 2);
+                break;
+            case 'z':
+                points -= (10 * 2);
+                break;
+            default:
+                break;
+        }
+
+        LetterPad letterPad = new LetterPad(this, boardView);
+        lettersCount = letterPad.getLettersCount() - 1;
+
+        actionBar.setTitle("Points: " + points + "  Letters in rack: " + lettersCount);
+    }
+
+    public void addPoints(int point){
+        if (points < 0){
+            Toast toast = Toast.makeText(this, R.string.game_over2, Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+
+            finish();
+        }
+        points += point;
+        LetterPad letterPad = new LetterPad(this, boardView);
+        lettersCount = letterPad.getLettersCount() - 1;
+
+        actionBar.setTitle("Points: " + points + "  Letters in rack: " + lettersCount);
+    }
+
+    public boolean placedWordsEmpty()
+    {
+        return placedWords.isEmpty();
+    }
+
+    public void returnResultEmpty(){
+        LetterPad letterPad = new LetterPad(this, boardView);
+        letterPad.returnResult("");
+    }
+
+    public void rollBackHashMap(String str){
+        LetterPad letterPad = new LetterPad(this, boardView);
+        letterPad.rollBackHashMap(str);
+
+    }
+
+    public void exitGameOver(boolean b){
+        if (b == true){
+            boardView.clearFocus();
+            Intent i = new Intent(WordFadeActivity.this, MainActivity.class);
+            startActivity(i);
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (opt == 0){
+            WFMusic.play(this, R.raw.hurry);
+        }
+
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        WFMusic.stop(this);
+    }
+
+    public void playChime()
+    {
+        //Create a new MediaPlayer to play this sound
+        mp = MediaPlayer.create(this, R.raw.chime);
+        mp.start();
+    }
 
 
 
