@@ -49,7 +49,7 @@ public class BoardView extends View {
     private final HashMap<String, Integer[]> hiliteWordList = new HashMap<>();
     private final ArrayList<Integer> hiliteLettersList = new ArrayList<Integer>();
     private final ArrayList<String> hiliteWord = new ArrayList<String>();
-    private final HashMap<Integer, Boolean> fuckYouList = new HashMap<>();
+    private final HashMap<Integer, Boolean> hiliteHelperList = new HashMap<>();
 
     private final HashMap<String, Boolean> hiliteWordBooleanList = new HashMap<>();
     private String startingLetter = "";
@@ -389,9 +389,9 @@ public class BoardView extends View {
 
                             final int n = i;
                             final int m = j;
-                            if (!fuckYouList.containsKey(i) && !fuckYouList.containsKey(j)){
-                                fuckYouList.put(i, false);
-                                fuckYouList.put(j, false);
+                            if (!hiliteHelperList.containsKey(i) && !hiliteHelperList.containsKey(j)){
+                                hiliteHelperList.put(i, false);
+                                hiliteHelperList.put(j, false);
                             }
 
 
@@ -401,8 +401,8 @@ public class BoardView extends View {
                                 public void onTick(long millisUntilFinished) {
 
 
-                                    if (fuckYouList.containsKey(n) && fuckYouList.containsKey(m)){
-                                        if (fuckYouList.get(n) == false && fuckYouList.get(m) == false){
+                                    if (hiliteHelperList.containsKey(n) && hiliteHelperList.containsKey(m)){
+                                        if (hiliteHelperList.get(n) == false && hiliteHelperList.get(m) == false){
 
 //                                        if (pauseBoolean == true){
 //                                            if (foreground.getColor() != (getResources().getColor(R.color.puzzle_background))){
@@ -531,8 +531,8 @@ public class BoardView extends View {
                                             }.start();
 
                                             if (pauseBoolean == false){
-                                                fuckYouList.put(n, true);
-                                                fuckYouList.put(m, true);
+                                                hiliteHelperList.put(n, true);
+                                                hiliteHelperList.put(m, true);
                                             }
 
 
@@ -548,8 +548,8 @@ public class BoardView extends View {
                                 public void onFinish() {
                                     Log.d(TAG, "DONE! 10 seconds; i is: " + n + ", j is: " + m);
 //
-//                                fuckYouList.put(n, true);
-//                                fuckYouList.put(m, true);
+//                                hiliteHelperList.put(n, true);
+//                                hiliteHelperList.put(m, true);
 //
 
                                 }
@@ -658,9 +658,9 @@ public class BoardView extends View {
 
     public void refreshWord(int i, int j){
 
-        if (fuckYouList.containsKey(i) && fuckYouList.containsKey(j)){
-            fuckYouList.put(i, false);
-            fuckYouList.put(j, false);
+        if (hiliteHelperList.containsKey(i) && hiliteHelperList.containsKey(j)){
+            hiliteHelperList.put(i, false);
+            hiliteHelperList.put(j, false);
         }
 
         invalidate();

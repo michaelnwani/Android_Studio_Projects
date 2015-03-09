@@ -679,11 +679,6 @@ public class LetterPad extends Dialog {
 
     protected void returnResult(String tile)
     {
-        if (mp != null)
-        {
-            mp.release();
-        }
-        playLetterChime();
 
         boardView.setSelectedTile(tile);
         dismiss();
@@ -819,9 +814,17 @@ public class LetterPad extends Dialog {
 
                     game.putLetterHashMap(i, game.getLetterFromLetterPoints(randomIndex));
                     //game.subtractpoints based on letter
-                    game.subtractPoints(game.getLetterHashMap(i));
+                    int points = game.subtractPoints(game.getLetterHashMap(i));
+
 //                    letterHashMap.put(i, game.getLetterFromLetterPoints(randomIndex));
                     letters[i].setText(game.getLetterHashMap(i));
+                    if (points < 0){
+                        Toast toast = Toast.makeText(game, R.string.game_over2, Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+
+                        game.exitGameOver(true);
+                    }
 
                     break;
                 }
@@ -970,7 +973,7 @@ public class LetterPad extends Dialog {
     public void playLetterChime()
     {
         //Create a new MediaPlayer to play this sound
-        mp = MediaPlayer.create(game, R.raw.chomp);
+        mp = MediaPlayer.create(game, R.raw.chime);
         mp.start();
     }
 

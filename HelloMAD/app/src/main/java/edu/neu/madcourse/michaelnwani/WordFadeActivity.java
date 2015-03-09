@@ -552,8 +552,10 @@ public class WordFadeActivity extends Activity {
         return letterHashMap.get(index);
     }
 
-    public void subtractPoints(String letter)
+    public int subtractPoints(String letter)
     {
+
+
         switch (letter.charAt(0))
         {
             case 'a':
@@ -640,8 +642,9 @@ public class WordFadeActivity extends Activity {
 
         LetterPad letterPad = new LetterPad(this, boardView);
         lettersCount = letterPad.getLettersCount() - 1;
-
         actionBar.setTitle("Points: " + points + "  Letters in rack: " + lettersCount);
+
+        return points;
     }
 
     public void addPoints(int point){
