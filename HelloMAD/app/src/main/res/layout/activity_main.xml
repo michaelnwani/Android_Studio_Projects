@@ -46,6 +46,13 @@
             android:textSize="24sp"/>
 
         <Button
+            android:id="@+id/communication_button"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/communication_button"
+            android:textSize="24sp"/>
+
+        <Button
             android:id="@+id/quit_button"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"

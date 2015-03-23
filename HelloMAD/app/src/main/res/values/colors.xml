@@ -9,6 +9,7 @@
 -->
 <resources>
    <color name="background">#3500ffff</color>
+   <color name="main_background">#3399FF</color>
    <color name="puzzle_background">#ffe6f0ff</color>
    <color name="puzzle_hilite">#ffffffff</color>
    <color name="puzzle_light">#64c6d4ef</color>

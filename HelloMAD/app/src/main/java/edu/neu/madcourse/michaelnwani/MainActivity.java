@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.parse.Parse;
+
 import edu.neu.madcourse.michaelnwani.org.example.sudoku.Sudoku;
 
 
@@ -20,10 +22,14 @@ public class MainActivity extends Activity {
     private Button mErrorButton;
     private Button mDictionaryButton;
     private Button mWordFadeButton;
+    private Button mCommunicationButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "SNyEwzE3nDN8umAaAcoE0090JG0T18fzd9q60Iu1", "xwk48u5oDGYICuuxm2q3qXeQiKa66GgV8yuwQXic");
         setContentView(R.layout.activity_main);
 
         ActionBar actionBar = getActionBar();
@@ -37,6 +43,8 @@ public class MainActivity extends Activity {
         mErrorButton = (Button)findViewById(R.id.error_button);
         mDictionaryButton = (Button)findViewById(R.id.dictionary_button);
         mWordFadeButton = (Button)findViewById(R.id.wordfade_button);
+
+        mCommunicationButton = (Button)findViewById(R.id.communication_button);
 
         mAboutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +99,17 @@ public class MainActivity extends Activity {
 
             }
         });
+
+        mCommunicationButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(MainActivity.this, CommunicationActivity.class);
+                startActivity(i);
+            }
+        });
+
+
 
 
 

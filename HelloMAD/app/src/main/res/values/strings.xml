@@ -100,5 +100,16 @@ row, each column, and each of the 3x3 boxes
     <string name="on_label">On</string>
     <string name="off_label">Off</string>
 
+    <string name="communication_button">Communication</string>
+
+
+    <string name="register">Register</string>
+    <string name="unregister">Unregister</string>
+    <string name="send_label">Send</string>
+    <string name="clear_label">Clear</string>
+    <string name="communication_ack_text">Got a lot of help using TA\'s GCMSample code: \n https://www.dropbox.com/s/1ca278zojj3zkqj/NUMAD15S-GCMSampleDemo.zip?dl=0 \n
+        Also the ParseSample code from Github: \n https://github.com/zhongjieM/ParseSample</string>
+
+
 
 </resources>
