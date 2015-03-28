@@ -3,13 +3,19 @@ package edu.neu.madcourse.michaelnwani;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.parse.Parse;
+import com.parse.ParseInstallation;
+import com.parse.PushService;
 
 import edu.neu.madcourse.michaelnwani.org.example.sudoku.Sudoku;
 
@@ -23,13 +29,18 @@ public class MainActivity extends Activity {
     private Button mDictionaryButton;
     private Button mWordFadeButton;
     private Button mCommunicationButton;
+    private Button mTwoPlayerWordFadeButton;
+    public static String playerNameInMain;
+    public static ConnectivityManager connectivityManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "SNyEwzE3nDN8umAaAcoE0090JG0T18fzd9q60Iu1", "xwk48u5oDGYICuuxm2q3qXeQiKa66GgV8yuwQXic");
+        connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+//        Parse.enableLocalDatastore(this);
+//        Parse.initialize(this, "SNyEwzE3nDN8umAaAcoE0090JG0T18fzd9q60Iu1", "xwk48u5oDGYICuuxm2q3qXeQiKa66GgV8yuwQXic");
         setContentView(R.layout.activity_main);
 
         ActionBar actionBar = getActionBar();
@@ -45,6 +56,8 @@ public class MainActivity extends Activity {
         mWordFadeButton = (Button)findViewById(R.id.wordfade_button);
 
         mCommunicationButton = (Button)findViewById(R.id.communication_button);
+
+        mTwoPlayerWordFadeButton = (Button)findViewById(R.id.two_player_wordfade_button);
 
         mAboutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,10 +122,43 @@ public class MainActivity extends Activity {
             }
         });
 
+        mTwoPlayerWordFadeButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                //source: http://stackoverflow.com/questions/7071578/connectivitymanager-to-verify-internet-connection
+                if (connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isAvailable() && connectivityManager.getActiveNetworkInfo().isConnected()){
+                    if (playerNameInMain == null || playerNameInMain.equals("")){
+                        PlayerNameDialog playerNameDialog = new PlayerNameDialog(MainActivity.this);
+                        playerNameDialog.show();
+                    }
+                    else{
+                        Intent i = new Intent(MainActivity.this, WordFadeTwoPlayerActivity.class);
+                        startActivity(i);
+                    }
+                }
+                else{
+                    Toast toast = Toast.makeText(MainActivity.this, "No Internet connection found", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
 
 
+            }
+        });
 
+        Parse.initialize(this,"SNyEwzE3nDN8umAaAcoE0090JG0T18fzd9q60Iu1", "xwk48u5oDGYICuuxm2q3qXeQiKa66GgV8yuwQXic");
+        PushService.setDefaultPushCallback(this, MainActivity.class);
+        ParseInstallation.getCurrentInstallation().saveInBackground();
 
+    }
+
+    public void setPlayerName(String name){
+        playerNameInMain = name;
+    }
+
+    public String getPlayerName(){
+        return playerNameInMain;
     }
 
 

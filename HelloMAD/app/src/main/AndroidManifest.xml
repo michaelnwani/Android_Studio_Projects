@@ -15,7 +15,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
     <permission
         android:name="edu.neu.madcourse.michaelnwani.permission.C2D_MESSAGE"
@@ -23,6 +22,7 @@
     <uses-permission android:name="edu.neu.madcourse.michaelnwani.permission.C2D_MESSAGE" />
 
     <application
+        android:name=".Application"
         android:allowBackup="true"
         android:icon="@drawable/chibi_mike"
         android:label="@string/app_name"
@@ -53,6 +53,11 @@
         </activity>
         <activity
             android:name=".CommunicationActivity">
+
+        </activity>
+        <activity
+            android:name=".WordFadeTwoPlayerActivity"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity android:name=".org.example.sudoku.Sudoku"
@@ -98,6 +103,19 @@
                 <category android:name="edu.neu.madcourse.michaelnwani" />
             </intent-filter>
         </receiver>
+
+        <receiver
+            android:name="edu.neu.madcourse.michaelnwani.GcmBroadcastReceiverTwo"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="edu.neu.madcourse.michaelnwani" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="edu.neu.madcourse.michaelnwani.GcmIntentServiceTwo" />
 
 
     </application>

@@ -58,7 +58,7 @@ row, each column, and each of the 3x3 boxes
     <string name="loading_text">\
     Loading... please wait</string>
     <string name="letterpad_title">Letter Rack</string>
-    <string name="wordfade_button">WordFade</string>
+    <string name="wordfade_button">Word Game</string>
     <string name="dump_shortcut">d</string>
     <string name="split_label">Split!</string>
     <string name="dump_label">Dump!</string>
@@ -109,6 +109,8 @@ row, each column, and each of the 3x3 boxes
     <string name="clear_label">Clear</string>
     <string name="communication_ack_text">Got a lot of help using TA\'s GCMSample code: \n https://www.dropbox.com/s/1ca278zojj3zkqj/NUMAD15S-GCMSampleDemo.zip?dl=0 \n
         Also the ParseSample code from Github: \n https://github.com/zhongjieM/ParseSample</string>
+    <string name="two_player_wordfade_button">Two Player Word Game</string>
+    <string name="enter_player_name">Enter your player name:</string>
 
 
 

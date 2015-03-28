@@ -52,58 +52,65 @@ public class WordFadeActivity extends Activity {
     private final HashMap<String, String> words = new HashMap<String, String>(FILE_WORD_COUNT);
     private final ArrayList<String> placedWords = new ArrayList<String>();
     private ActionBar actionBar;
-    private static HashMap<Integer, String> letterHashMap = new HashMap<Integer, String>();
+    private HashMap<Integer, String> letterHashMap = new HashMap<Integer, String>();
     private static boolean toggleMenuItem = true;
     private static int opt;
     private MediaPlayer mp;
+    public static String lettersGame[] = new String[21];
 
+    public String setLetters(int i){
+        lettersGame[i] = getLetterHashMap(i); //will contain a random letter
+        return lettersGame[i];
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-          actionBar = getActionBar();
+        actionBar = getActionBar();
 
-        initializeAlphabet();
         fillLetterHashMap();
-        //0 is on
-        //1 is off
 
-        opt = getIntent().getIntExtra(MUSIC_OPTION, 1);
-
-
-        fileRead.put("a",false);
-        fileRead.put("b",false);
-        fileRead.put("c",false);
-        fileRead.put("d",false);
-        fileRead.put("e",false);
-        fileRead.put("f",false);
-        fileRead.put("g",false);
-        fileRead.put("h",false);
-        fileRead.put("i",false);
-        fileRead.put("j",false);
-        fileRead.put("k",false);
-        fileRead.put("l",false);
-        fileRead.put("m",false);
-        fileRead.put("n",false);
-        fileRead.put("o",false);
-        fileRead.put("p",false);
-        fileRead.put("q",false);
-        fileRead.put("r",false);
-        fileRead.put("s",false);
-        fileRead.put("t",false);
-        fileRead.put("u",false);
-        fileRead.put("v",false);
-        fileRead.put("w",false);
-        fileRead.put("x",false);
-        fileRead.put("y",false);
-        fileRead.put("z",false);
-
-        boardView = new BoardView(this);
-        setContentView(boardView);
-        boardView.requestFocus();
-
-        // If the activity is restarted, do a continue next time
-        getIntent().putExtra(MUSIC_OPTION, 1);
+//        initializeAlphabet();
+//        fillLetterHashMap();
+//        //0 is on
+//        //1 is off
+//
+//        opt = getIntent().getIntExtra(MUSIC_OPTION, 1);
+//
+//
+//        fileRead.put("a",false);
+//        fileRead.put("b",false);
+//        fileRead.put("c",false);
+//        fileRead.put("d",false);
+//        fileRead.put("e",false);
+//        fileRead.put("f",false);
+//        fileRead.put("g",false);
+//        fileRead.put("h",false);
+//        fileRead.put("i",false);
+//        fileRead.put("j",false);
+//        fileRead.put("k",false);
+//        fileRead.put("l",false);
+//        fileRead.put("m",false);
+//        fileRead.put("n",false);
+//        fileRead.put("o",false);
+//        fileRead.put("p",false);
+//        fileRead.put("q",false);
+//        fileRead.put("r",false);
+//        fileRead.put("s",false);
+//        fileRead.put("t",false);
+//        fileRead.put("u",false);
+//        fileRead.put("v",false);
+//        fileRead.put("w",false);
+//        fileRead.put("x",false);
+//        fileRead.put("y",false);
+//        fileRead.put("z",false);
+//
+//        boardView = new BoardView(this);
+//        setContentView(boardView);
+//        boardView.requestFocus();
+//
+//        // If the activity is restarted, do a continue next time
+//        getIntent().putExtra(MUSIC_OPTION, 1);
 
 
     }
@@ -549,8 +556,14 @@ public class WordFadeActivity extends Activity {
     }
 
     public String getLetterHashMap(int index){
+        int randomIndex = randInt(0, 25);
+        return letterHashMap.get(randomIndex);
+    }
+    public String getLetterHashMap2(int index){
+
         return letterHashMap.get(index);
     }
+
 
     public int subtractPoints(String letter)
     {
@@ -681,6 +694,8 @@ public class WordFadeActivity extends Activity {
     public void exitGameOver(boolean b){
         if (b == true){
             boardView.clearFocus();
+            LetterPad letterPad = new LetterPad(this, boardView);
+            letterPad.makeLettersNull();
             Intent i = new Intent(WordFadeActivity.this, MainActivity.class);
             startActivity(i);
         }
@@ -710,7 +725,65 @@ public class WordFadeActivity extends Activity {
         mp.start();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "In onStart");
+//        boardView.setGameNull();
+
+        initializeAlphabet();
+
+        //0 is on
+        //1 is off
+
+        opt = getIntent().getIntExtra(MUSIC_OPTION, 1);
 
 
+        fileRead.put("a",false);
+        fileRead.put("b",false);
+        fileRead.put("c",false);
+        fileRead.put("d",false);
+        fileRead.put("e",false);
+        fileRead.put("f",false);
+        fileRead.put("g",false);
+        fileRead.put("h",false);
+        fileRead.put("i",false);
+        fileRead.put("j",false);
+        fileRead.put("k",false);
+        fileRead.put("l",false);
+        fileRead.put("m",false);
+        fileRead.put("n",false);
+        fileRead.put("o",false);
+        fileRead.put("p",false);
+        fileRead.put("q",false);
+        fileRead.put("r",false);
+        fileRead.put("s",false);
+        fileRead.put("t",false);
+        fileRead.put("u",false);
+        fileRead.put("v",false);
+        fileRead.put("w",false);
+        fileRead.put("x",false);
+        fileRead.put("y",false);
+        fileRead.put("z",false);
 
+        boardView = new BoardView(this);
+        setContentView(boardView);
+        boardView.requestFocus();
+
+        // If the activity is restarted, do a continue next time
+        getIntent().putExtra(MUSIC_OPTION, 1);
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        fillLetterHashMap();
+        LetterPad letterPad = new LetterPad(this, boardView);
+        letterPad.makeLettersNull();
+        boardView = new BoardView(this);
+        setContentView(boardView);
+        boardView.requestFocus();
+    }
 }

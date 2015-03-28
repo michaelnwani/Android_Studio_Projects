@@ -28,7 +28,7 @@ public class WordFadeMenuActivity extends Activity {
         setContentView(R.layout.activity_wordfade);
 
         ActionBar actionBar = getActionBar();
-        actionBar.setTitle("WordFade Main Menu");
+        actionBar.setTitle("Word Game");
 
         mAcknowledgementButton = (Button)findViewById(R.id.wf_acknowledgement_button);
         mInstructionsButton = (Button)findViewById(R.id.instructions_button);
