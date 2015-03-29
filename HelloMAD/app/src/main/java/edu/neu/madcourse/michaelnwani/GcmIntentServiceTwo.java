@@ -31,9 +31,12 @@ public class GcmIntentServiceTwo extends IntentService {
         Bundle extras = intent.getExtras();
         Log.d(String.valueOf(extras.size()), extras.toString());
         if (!extras.isEmpty()) {
-            if (contentText.startsWith(WordFadeTwoPlayerActivity.playerName)){
-                sendNotification(alertText, titleText, contentText);
+            if (WordFadeTwoPlayerActivity.playerName != null){
+                if (contentText.startsWith(WordFadeTwoPlayerActivity.playerName)){
+                    sendNotification(alertText, titleText, contentText);
+                }
             }
+
 
         }
         // Release the wake lock provided by the WakefulBroadcastReceiver.
